@@ -25,8 +25,9 @@ class UserController
     private $userId = null;
     private $version = null;
     private $requestMethod = "GET";
+    private $currentUser = null; // Added to track the current user
 
-    public function __construct($requestMethod, $version, $userId) {
+    public function __construct($requestMethod, $version, $userId, $currentUser) {
         $this->data = array (
             1 => new User (1, "tony", 0, '1c8bfe8f801d79745c4631d09fff36c82aa37fc4cce4fc946683d7b336b63032'),
             2 => new User (2, "morph", 1, 'e5326ba4359f77c2623244acb04f6ac35c4dfca330ebcccdf9b734e5b1df90a8'),
@@ -35,6 +36,7 @@ class UserController
         $this->requestMethod = $requestMethod;
         $this->userId = $userId;
         $this->version = $version;
+        $this->currentUser = $currentUser; // Initialize current user
     }
 
     private function validateAdd($input)
@@ -77,6 +79,10 @@ class UserController
             new OAT\Response(
                 response: 404,
                 description: 'User not found.',
+            ),
+            new OAT\Response(
+                response: 403,
+                description: 'Unauthorized access.',
             ),
         ]
     )   
@@ -308,6 +314,6 @@ class UserController
         // Implement your authorization logic here
         // For example, check if the current user has permission to access the user with the given ID
         // This is a placeholder implementation
-        return true; // Change this to actual authorization logic
+        return $this->currentUser && $this->currentUser->id === $id; // Ensure the current user can only access their own data
     }
 }

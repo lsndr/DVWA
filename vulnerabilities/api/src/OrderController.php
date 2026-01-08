@@ -9,7 +9,7 @@ class OrderController
     private $data = array ();
     private $orderId = null;
     private $requestMethod = "GET";
-    private $version = "v2"; // Default to the latest version
+    private $version = "v2"; // Set default version to the latest
 
     public function __construct($requestMethod, $orderId) {
         $this->data = array (

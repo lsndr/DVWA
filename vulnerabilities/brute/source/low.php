@@ -1,5 +1,8 @@
 <?php
 
+// Suppress error reporting
+error_reporting(0);
+
 if( isset( $_GET[ 'Login' ] ) ) {
 	// Get username
 	$user = $_GET[ 'username' ];

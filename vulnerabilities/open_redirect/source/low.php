@@ -9,9 +9,13 @@ $allowed_urls = [
 if (array_key_exists("redirect", $_GET) && $_GET['redirect'] != "") {
     $redirect_url = $_GET['redirect'];
     
-    // Validate the redirect URL against the allowlist
-    foreach ($allowed_urls as $allowed_url) {
-        if (strpos($redirect_url, $allowed_url) === 0) {
+    // Parse the URL to ensure it is valid and extract the host
+    $parsed_url = parse_url($redirect_url);
+    if ($parsed_url !== false && isset($parsed_url['scheme']) && isset($parsed_url['host'])) {
+        $redirect_host = $parsed_url['scheme'] . '://' . $parsed_url['host'];
+        
+        // Validate the host against the allowlist
+        if (in_array($redirect_host, $allowed_urls)) {
             header("location: " . $redirect_url);
             exit;
         }
