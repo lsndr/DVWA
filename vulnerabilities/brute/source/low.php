@@ -10,7 +10,14 @@ if( isset( $_GET[ 'Login' ] ) ) {
 
 	// Check the database
 	$query  = "SELECT * FROM `users` WHERE user = '$user' AND password = '$pass';";
-	$result = mysqli_query($GLOBALS["___mysqli_ston"],  $query ) or die( '<pre>' . ((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)) . '</pre>' );
+	$result = mysqli_query($GLOBALS["___mysqli_ston"],  $query );
+
+	if($result === false) {
+        // Log the error message to the server logs
+        error_log('Database query error: ' . mysqli_error($GLOBALS["___mysqli_ston"]));
+        // Display a generic error message to the user
+        die('<pre>An error occurred. Please try again later.</pre>');
+    }
 
 	if( $result && mysqli_num_rows( $result ) == 1 ) {
 		// Get users details
