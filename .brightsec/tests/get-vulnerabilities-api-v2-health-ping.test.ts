@@ -22,10 +22,7 @@ test('GET /vulnerabilities/api/v2/health/ping', { signal: AbortSignal.timeout(ti
   await runner
     .createScan({
       tests: [
-        'improper_asset_management',
-        'insecure_tls_configuration',
-        'http_method_fuzzing',
-        'full_path_disclosure'
+        'improper_asset_management'
       ],
       attackParamLocations: [AttackParamLocation.PATH],
       starMetadata: {

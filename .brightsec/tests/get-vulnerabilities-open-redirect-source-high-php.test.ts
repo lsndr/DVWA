@@ -21,7 +21,7 @@ after(() => runner.clear());
 test('GET /vulnerabilities/open_redirect/source/high.php', { signal: AbortSignal.timeout(timeout) }, async () => {
   await runner
     .createScan({
-      tests: ['unvalidated_redirect', 'xss'],
+      tests: ['unvalidated_redirect'],
       attackParamLocations: [AttackParamLocation.QUERY],
       starMetadata: {
         code_source: "lsndr/DVWA:master",

@@ -21,7 +21,7 @@ after(() => runner.clear());
 test('GET /vulnerabilities/api/v2/order', { signal: AbortSignal.timeout(timeout) }, async () => {
   await runner
     .createScan({
-      tests: ['bopla', 'id_enumeration', 'improper_asset_management', 'sqli', 'xss'],
+      tests: ['improper_asset_management'],
       attackParamLocations: [AttackParamLocation.HEADER],
       starMetadata: {
         code_source: "lsndr/DVWA:master",

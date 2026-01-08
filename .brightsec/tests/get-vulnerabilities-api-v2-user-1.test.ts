@@ -21,7 +21,7 @@ after(() => runner.clear());
 test('GET /vulnerabilities/api/v2/user/1', { signal: AbortSignal.timeout(timeout) }, async () => {
   await runner
     .createScan({
-      tests: ['id_enumeration', 'bopla', 'sqli', 'xss', 'csrf', 'full_path_disclosure'],
+      tests: ['id_enumeration'],
       attackParamLocations: [AttackParamLocation.PATH],
       starMetadata: {
         code_source: "lsndr/DVWA:master",

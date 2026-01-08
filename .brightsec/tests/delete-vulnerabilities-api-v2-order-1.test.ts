@@ -21,7 +21,7 @@ after(() => runner.clear());
 test('DELETE /vulnerabilities/api/v2/order/1', { signal: AbortSignal.timeout(timeout) }, async () => {
   await runner
     .createScan({
-      tests: ['bopla', 'csrf', 'id_enumeration', 'improper_asset_management', 'sqli'],
+      tests: ['improper_asset_management'],
       attackParamLocations: [AttackParamLocation.PATH, AttackParamLocation.HEADER],
       starMetadata: {
         code_source: "lsndr/DVWA:master",

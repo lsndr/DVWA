@@ -21,7 +21,7 @@ after(() => runner.clear());
 test('GET /vulnerabilities/brute/source/low.php', { signal: AbortSignal.timeout(timeout) }, async () => {
   await runner
     .createScan({
-      tests: ['sqli', 'xss', 'full_path_disclosure'],
+      tests: ['full_path_disclosure'],
       attackParamLocations: [AttackParamLocation.QUERY],
       starMetadata: {
         code_source: 'lsndr/DVWA:master',

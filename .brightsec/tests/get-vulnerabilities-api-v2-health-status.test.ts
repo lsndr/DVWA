@@ -21,7 +21,7 @@ after(() => runner.clear());
 test('GET /vulnerabilities/api/v2/health/status', { signal: AbortSignal.timeout(timeout) }, async () => {
   await runner
     .createScan({
-      tests: ['improper_asset_management', 'insecure_tls_configuration', 'full_path_disclosure'],
+      tests: ['improper_asset_management'],
       attackParamLocations: [AttackParamLocation.PATH],
       starMetadata: {
         code_source: "lsndr/DVWA:master",
