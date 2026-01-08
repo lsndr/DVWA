@@ -6,14 +6,15 @@ $valid_redirects = [
 ];
 
 if (array_key_exists("redirect", $_GET) && $_GET['redirect'] != "") {
-    // Parse the URL to extract the host and path
+    // Parse the URL to extract the path
     $url_parts = parse_url($_GET['redirect']);
-    $host = isset($url_parts['host']) ? $url_parts['host'] : '';
     $path = isset($url_parts['path']) ? basename($url_parts['path']) : '';
 
-    // Ensure the host is empty (relative URL) and the path is in the allowlist
-    if ($host === '' && in_array($path, $valid_redirects)) {
-        header("location: " . $_GET['redirect']);
+    // Check if the path is in the allowlist
+    if (in_array($path, $valid_redirects)) {
+        // Construct a safe URL using a base URL
+        $safe_url = '/vulnerabilities/open_redirect/source/' . $path;
+        header("location: " . $safe_url);
         exit;
     } else {
         http_response_code(400);

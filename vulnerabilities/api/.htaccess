@@ -6,5 +6,6 @@
 	RewriteRule ^ - [L]
 
 	# Route all other calls through the API
+	RewriteRule ^v1/(.*)$ - [R=404,L]
 	RewriteRule ^ public/index.php
 </IfModule>

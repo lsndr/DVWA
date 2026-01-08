@@ -1,7 +1,12 @@
 <?php
 
-// Suppress error reporting
-error_reporting(0);
+// Disable error display to users
+ini_set('display_errors', 0);
+ini_set('display_startup_errors', 0);
+
+// Log errors to a file instead
+ini_set('log_errors', 1);
+ini_set('error_log', '/var/log/php_errors.log');
 
 if( isset( $_GET[ 'Login' ] ) ) {
 	// Get username
