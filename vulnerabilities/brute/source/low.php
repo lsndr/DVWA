@@ -8,6 +8,14 @@ ini_set('display_startup_errors', 0);
 ini_set('log_errors', 1);
 ini_set('error_log', '/var/log/php_errors.log');
 
+// Ensure the database connection is established
+if (!isset($GLOBALS["___mysqli_ston"])) {
+    // Log the error message to the server logs
+    error_log('Database connection is not established.');
+    // Display a generic error message to the user
+    die('<pre>An error occurred. Please try again later.</pre>');
+}
+
 if( isset( $_GET[ 'Login' ] ) ) {
 	// Get username
 	$user = $_GET[ 'username' ];

@@ -1,22 +1,22 @@
 <?php
 
-// Define an allowlist of approved paths for redirection
-$allowed_paths = [
-    '/home',
-    '/dashboard',
-    '/profile'
+// Define a fixed set of internal pages for redirection
+$allowed_pages = [
+    'home' => '/home.php',
+    'dashboard' => '/dashboard.php',
+    'profile' => '/profile.php'
 ];
 
 if (array_key_exists("redirect", $_GET) && $_GET['redirect'] != "") {
-    $redirect_path = $_GET['redirect'];
+    $redirect_key = $_GET['redirect'];
     
-    // Ensure the redirect path is relative and in the allowlist
-    if (in_array($redirect_path, $allowed_paths)) {
-        header("location: " . $redirect_path);
+    // Use a fixed mapping to internal pages only
+    if (array_key_exists($redirect_key, $allowed_pages)) {
+        header("location: " . $allowed_pages[$redirect_key]);
         exit;
     }
     
-    // If the path is not in the allowlist, do not redirect
+    // If the key is not in the allowed list, do not redirect
     http_response_code(400);
     echo "Invalid redirect target.";
     exit;

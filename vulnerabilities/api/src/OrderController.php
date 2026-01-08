@@ -302,6 +302,15 @@ class OrderController
     }
 
     public function processRequest() {
+        // Ensure only the latest version is processed
+        if ($this->version !== 'v2') {
+            $response['status_code_header'] = 'HTTP/1.1 410 Gone';
+            $response['body'] = json_encode(array("status" => "This API version is deprecated."));
+            header($response['status_code_header']);
+            echo $response['body'];
+            return;
+        }
+
         switch ($this->requestMethod) {
             case 'GET':
                 if (isset ($this->orderId) && is_numeric ($this->orderId)) {
